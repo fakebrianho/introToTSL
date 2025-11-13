@@ -29,6 +29,12 @@ async function init() {
 	scene.add(meshes.default)
 	scene.add(lights.default)
 	renderer.setAnimationLoop(animate)
+	renderer.debug
+		.getShaderAsync(scene, camera, meshes.default)
+		.then((shader) => {
+			console.log('Generated Fragment Shader:')
+			console.log(shader.fragmentShader)
+		})
 }
 function animate() {
 	renderer.render(scene, camera)

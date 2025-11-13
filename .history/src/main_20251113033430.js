@@ -2,6 +2,7 @@ import * as THREE from 'three/webgpu'
 import { vec3, time, add, mul, sin, cos } from 'three/tsl'
 import { addLight } from './addLight'
 import { addDefaultMeshes } from './addDefaultMeshes'
+import WebGPU from 'three/addons/capabilities/WebGPU.js'
 
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(
@@ -33,3 +34,7 @@ async function init() {
 function animate() {
 	renderer.render(scene, camera)
 }
+renderer.debug.getShaderAsync(scene, camera, mesh).then((shader) => {
+	console.log('Generated Fragment Shader:')
+	console.log(shader.fragmentShader)
+})

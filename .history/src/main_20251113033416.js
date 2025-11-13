@@ -2,6 +2,7 @@ import * as THREE from 'three/webgpu'
 import { vec3, time, add, mul, sin, cos } from 'three/tsl'
 import { addLight } from './addLight'
 import { addDefaultMeshes } from './addDefaultMeshes'
+import WebGPU from 'three/addons/capabilities/WebGPU.js'
 
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(
@@ -10,7 +11,11 @@ const camera = new THREE.PerspectiveCamera(
 	0.1,
 	100
 )
-const renderer = new THREE.WebGPURenderer({ antialias: true })
+
+const renderer = WebGPU.isAvailable()
+	? new THREE.WebGPURenderer({ antialias: true })
+	: new THREE.WebGLRenderer({ antialias: true })
+
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 camera.position.set(0, 0, 5)
@@ -33,3 +38,7 @@ async function init() {
 function animate() {
 	renderer.render(scene, camera)
 }
+renderer.debug.getShaderAsync(scene, camera, mesh).then((shader) => {
+	console.log('Generated Fragment Shader:')
+	console.log(shader.fragmentShader)
+})

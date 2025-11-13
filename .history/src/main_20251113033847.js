@@ -33,3 +33,7 @@ async function init() {
 function animate() {
 	renderer.render(scene, camera)
 }
+renderer.debug.getShaderAsync(scene, camera, meshes.default).then((shader) => {
+	console.log('Generated Fragment Shader:')
+	console.log(shader.fragmentShader)
+})
