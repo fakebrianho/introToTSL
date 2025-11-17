@@ -1,4 +1,5 @@
 import * as THREE from 'three/webgpu'
+import { vec3, time, add, mul, sin, cos } from 'three/tsl'
 import { addLight } from './addLight'
 import { addDefaultMeshes } from './addDefaultMeshes'
 

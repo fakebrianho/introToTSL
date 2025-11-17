@@ -14,6 +14,5 @@ export const addDefaultMeshes = () => {
 	mat.colorNode = animatedColor
 	const geometry = new THREE.PlaneGeometry(1, 1, 1, 1)
 	const mesh = new THREE.Mesh(geometry, mat)
-	mesh.scale.set(2, 2, 1)
 	return mesh
 }
